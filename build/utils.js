@@ -54,7 +54,7 @@ function getCssLoaders() {
         { loader: 'postcss-loader', options: { sourceMap: sourceMap } }
       ],
       include: cssInclude
-    },
+    }
     <% if(css === 'sass'){ -%>,{
       test: /\.scss$/,
       use: [
