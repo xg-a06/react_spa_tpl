@@ -32,7 +32,7 @@ function getCssLoaders() {
       include:[/node_modules/]
     },
     {
-      test: /^(.*\\.global).*\\.css$/,
+      test: /^(.*\.global)\.css$/,
       use: [
         { loader: lastLoader, options: { sourceMap: sourceMap } },
         {
@@ -44,7 +44,7 @@ function getCssLoaders() {
       include: cssInclude
     },
     {
-      test: /^(?!.*\\.global).*\\.css$/,
+      test: /^(?!.*\.global).*\.css$/,
       use: [
         { loader: lastLoader, options: { sourceMap: sourceMap } },
         {
