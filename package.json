@@ -11,7 +11,7 @@
     "build:prod": "cross-env NODE_ENV=production BUILD_ENV=prod node build/build.js",
     "server": "a06-server kill all && a06-server start -r ./dist -z -c",
     <% if(esLint){ %>"lint": "eslint --ignore-pattern src/assets/* --ext .js --ext .jsx src",
-      "lint:fix": "eslint --ignore-pattern src/assets/* --fix --ext .js --ext .jsx src",
+    "lint:fix": "eslint --ignore-pattern src/assets/* --fix --ext .js --ext .jsx src"
     <%} %>
   },
   "pre-commit": [],
