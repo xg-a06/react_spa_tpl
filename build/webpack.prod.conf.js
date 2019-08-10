@@ -18,14 +18,14 @@ const { getCssLoaders } = require('./utils')
 const autoAddDllRes = () => {
   return new AddAssetHtmlPlugin([
     {
-      publicPath: config[process.env.BUILD_ENV].PUBLIC_PATH + 'static/dll/css', // 注入到html中的路径
+      publicPath: config[process.env.BUILD_ENV].PUBLIC_PATH + config[process.env.BUILD_ENV].SUB_DIR+'/dll/css', // 注入到html中的路径
       outputPath: subDir('dll/css'), // 最终输出的目录
       filepath: resolve('src/assets/dll/**/*.css'),
       includeSourcemap: false,
       typeOfAsset: 'css'
     },
     {
-      publicPath: config[process.env.BUILD_ENV].PUBLIC_PATH + 'static/dll/js', // 注入到html中的路径
+      publicPath: config[process.env.BUILD_ENV].PUBLIC_PATH + config[process.env.BUILD_ENV].SUB_DIR+'/dll/js', // 注入到html中的路径
       outputPath: subDir('dll/js'), // 最终输出的目录
       filepath: resolve('src/assets/dll/**/*.js'),
       includeSourcemap: false,
@@ -104,7 +104,7 @@ const buildConfig = merge(baseConfig, {
     }),
     new CopyWebpackPlugin([
       {
-        from: resolve('src/static'),
+        from: resolve('src/public'),
         to: resolve(`dist/${config[process.env.BUILD_ENV].SUB_DIR}`),
         ignore: ['.*']
       },

@@ -15,7 +15,7 @@ const devConfig = merge(baseConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new CopyWebpackPlugin([
       {
-        from: resolve('src/static'),
+        from: resolve('src/public'),
         to: resolve(`dist/${config[process.env.BUILD_ENV].SUB_DIR}`),
         ignore: ['.*'],
       },

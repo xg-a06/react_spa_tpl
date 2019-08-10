@@ -50,7 +50,9 @@ if (process.env.BUILD_ENV === 'local') {
     {
       libraryName: 'antd',
     },
-  ]);
+    ],
+    'react-hot-loader/babel'
+  );
 }
 
 module.exports = { presets, plugins };

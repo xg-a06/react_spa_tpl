@@ -4,7 +4,7 @@
   "description": "<%=projectDescription%>",
   "main": "src/main.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=local BUILD_ENV=local webpack-dev-server --config build/webpack.dev.conf.js",
+    "start": "cross-env NODE_ENV=development BUILD_ENV=local webpack-dev-server --config build/webpack.dev.conf.js",
     "build:dll": "cross-env NODE_ENV=production BUILD_ENV=prod webpack --config build/webpack.dll.conf.js",
     "build:dev": "cross-env NODE_ENV=development BUILD_ENV=dev node build/build.js",
     "build:test": "cross-env NODE_ENV=development BUILD_ENV=test node build/build.js",
@@ -83,6 +83,7 @@
     <%} %><% if(css==='less'){ %>"less": "^3.9.0",
     "less-loader": "^5.0.0",
     <%} %>"optimize-css-assets-webpack-plugin": "^5.0.1",
+    "react-hot-loader": "^4.12.10",
     "ora": "^3.4.0",
     "postcss-loader": "^3.0.0",
     "pre-commit": "^1.2.2",

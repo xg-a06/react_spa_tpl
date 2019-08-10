@@ -11,8 +11,9 @@ function subDir(dir) {
 }
 
 function getCssLoaders() {
-  let env = process.env.NODE_ENV
-  let isLocal = env === 'local'
+  const env = process.env.NODE_ENV;
+  const build = process.env.BUILD_ENV;
+  let isLocal = build === 'local'
   let isProd = env === 'production'
   let sourceMap = !isProd
   let lastLoader = isLocal ? 'style-loader' : MiniCssExtractPlugin.loader

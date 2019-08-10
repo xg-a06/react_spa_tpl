@@ -23,7 +23,8 @@ module.exports = {
       'react-redux',
       'axios'
     ],
-    ui: ['antd', 'antd/dist/antd.css']
+    ui: ['antd', 'antd/dist/antd.min.css']
+    // ui: ['antd/es/button', 'antd/dist/antd.min.css'],
   },
   module: {
     rules: [
@@ -63,13 +64,13 @@ module.exports = {
           }
         }
       }),
-      new OptimizeCssAssetsPlugin({
-        cssProcessor: cssnano,
-        cssProcessorOptions: {
-          discardComments: { safe: true,removeAll: true }
-        },
-        canPrint: true
-      })
+      // new OptimizeCssAssetsPlugin({
+      //   cssProcessor: cssnano,
+      //   cssProcessorOptions: {
+      //     discardComments: { safe: true,removeAll: true }
+      //   },
+      //   canPrint: true
+      // })
     ]
   },
   plugins: [
