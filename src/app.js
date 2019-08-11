@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader';
 import React, { PureComponent, Fragment } from 'react';
 
 class App extends PureComponent {
@@ -12,4 +11,4 @@ class App extends PureComponent {
 }
 
 
-export default hot(module)(TodoList);
+export default TodoList;

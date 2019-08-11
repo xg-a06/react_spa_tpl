@@ -27,8 +27,7 @@ const baseConfig = {
       '@assets': resolve('src/assets'),
       '@components': resolve('src/components'),
       '@routes': resolve('src/routes'),
-      '@store': resolve('src/store'),
-      'react-dom': '@hot-loader/react-dom',
+      '@store': resolve('src/store')
     }
   },
   module: {
