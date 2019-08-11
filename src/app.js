@@ -11,8 +11,5 @@ class App extends PureComponent {
   }
 }
 
-function getCom(BUILD_ENV) {
-  return BUILD_ENV === 'local' ? hot(module)(TodoList) : TodoList;
-}
 
-export default getCom(process.env.BUILD_ENV);
+export default hot(module)(TodoList);
