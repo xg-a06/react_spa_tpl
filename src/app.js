@@ -11,4 +11,4 @@ class App extends PureComponent {
 }
 
 
-export default TodoList;
+export default App;
