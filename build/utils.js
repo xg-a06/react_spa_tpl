@@ -2,15 +2,15 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const config = require('./config')
 
-function resolve(dir) {
+function resolve (dir) {
   return path.resolve(__dirname, '..', dir)
 }
 
-function subDir(dir) {
+function subDir (dir) {
   return path.posix.join(config[process.env.BUILD_ENV].SUB_DIR, dir)
 }
 
-function getCssLoaders() {
+function getCssLoaders () {
   const env = process.env.NODE_ENV;
   const build = process.env.BUILD_ENV;
   let isLocal = build === 'local'
@@ -19,18 +19,18 @@ function getCssLoaders() {
   let lastLoader = isLocal ? 'style-loader' : MiniCssExtractPlugin.loader
   const cssInclude = [/src/]
   const loaders = [
-    { 
+    {
       test: /\.css$/,
       use: [
-          { loader: lastLoader },
-          {
-              loader: 'css-loader'
-          },
-          {
-              loader: 'postcss-loader'
-          }
+        { loader: lastLoader },
+        {
+          loader: 'css-loader'
+        },
+        {
+          loader: 'postcss-loader'
+        }
       ],
-      include:[/node_modules/]
+      include: [/node_modules/]
     },
     {
       test: /^(.*\.global)\.css$/,
@@ -43,47 +43,63 @@ function getCssLoaders() {
         { loader: 'postcss-loader', options: { sourceMap: sourceMap } }
       ],
       include: cssInclude
-    },
-    {
-      test: /^(?!.*\.global).*\.css$/,
-      use: [
-        { loader: lastLoader, options: { sourceMap: sourceMap } },
-        {
-          loader: 'css-loader',
-          options: {  modules: true,localIdentName: '[hash:base64:6]',sourceMap: sourceMap, importLoaders: 1 }
-        },
-        { loader: 'postcss-loader', options: { sourceMap: sourceMap } }
-      ],
-      include: cssInclude
     }
-    <% if(css === 'sass'){ -%>,{
-      test: /\.scss$/,
-      use: [
-        { loader: lastLoader, options: { sourceMap: sourceMap } },
-        {
-          loader: 'css-loader',
-          options: { modules: true,localIdentName: '[hash:base64:6]',sourceMap: sourceMap, importLoaders: 2 }
-        },
-        { loader: 'postcss-loader', options: { sourceMap: sourceMap } },
-        { loader: 'sass-loader', options: { sourceMap: sourceMap } }
-      ],
-      include: resolve('src')
-      }
-    <%} -%>
-    <% if(css === 'less'){ -%>,{
-        test: /\.less$/,
+    <% if (css === 'sass') {
+      -%>, {
+        test: /\.scss$/,
         use: [
           { loader: lastLoader, options: { sourceMap: sourceMap } },
           {
             loader: 'css-loader',
-            options: { modules: true,localIdentName: '[hash:base64:6]',sourceMap: sourceMap, importLoaders: 2 }
+            options: { modules: true, localIdentName: '[hash:base64:6]', sourceMap: sourceMap, importLoaders: 2 }
+          },
+          { loader: 'postcss-loader', options: { sourceMap: sourceMap } },
+          { loader: 'sass-loader', options: { sourceMap: sourceMap } }
+        ],
+        include: resolve('src')
+      },
+        {
+          test: /^(?!.*\.global).*\.scss$/,
+          use: [
+            { loader: lastLoader, options: { sourceMap: sourceMap } },
+            {
+              loader: 'css-loader',
+              options: { modules: true, localIdentName: '[hash:base64:6]', sourceMap: sourceMap, importLoaders: 2 }
+            },
+            { loader: 'postcss-loader', options: { sourceMap: sourceMap } },
+            { loader: 'sass-loader', options: { sourceMap: sourceMap } }
+          ],
+          include: cssInclude
+        }
+        <%} -%>
+    <% if (css === 'less') {
+    -%>, {
+      test: /\.less$/,
+      use: [
+        { loader: lastLoader, options: { sourceMap: sourceMap } },
+        {
+          loader: 'css-loader',
+          options: { modules: true, localIdentName: '[hash:base64:6]', sourceMap: sourceMap, importLoaders: 2 }
+        },
+        { loader: 'postcss-loader', options: { sourceMap: sourceMap } },
+        { loader: 'less-loader', options: { sourceMap: sourceMap } }
+      ],
+      include: resolve('src')
+    },
+      {
+        test: /^(?!.*\.global).*\.less$/,
+        use: [
+          { loader: lastLoader, options: { sourceMap: sourceMap } },
+          {
+            loader: 'css-loader',
+            options: { modules: true, localIdentName: '[hash:base64:6]', sourceMap: sourceMap, importLoaders: 2 }
           },
           { loader: 'postcss-loader', options: { sourceMap: sourceMap } },
           { loader: 'less-loader', options: { sourceMap: sourceMap } }
         ],
-        include: resolve('src')
+        include: cssInclude
       }
-    <%} -%>
+      <%} -%>
   ]
   return loaders
 }
