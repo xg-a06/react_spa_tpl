@@ -12,7 +12,7 @@ const baseConfig = {
   mode: isProd ? 'production' : 'development',
   devtool: isProd ? '' : 'cheap-module-eval-source-map',
   entry: {
-    main: resolve('src/index.js')
+    main: ['react-hot-loader/patch', resolve('src/index.js')]
   },
   output: {
     filename: '[name].js',
@@ -22,10 +22,11 @@ const baseConfig = {
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     alias: {
+      'react-dom': '@hot-loader/react-dom',
       '@': resolve('src'),
       '@components': resolve('src/components'),
       '@assets': resolve('src/assets'),
-      '@components': resolve('src/components'),
+      '@pages': resolve('src/pages'),
       '@routes': resolve('src/routes'),
       '@store': resolve('src/store')
     }

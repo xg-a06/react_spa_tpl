@@ -1,7 +1,8 @@
+import { hot } from 'react-hot-loader/root';
 import React, { PureComponent, Fragment } from 'react';
 
 class App extends PureComponent {
-  render() {
+  render () {
     return (
       <Fragment>
         app
@@ -11,4 +12,4 @@ class App extends PureComponent {
 }
 
 
-export default App;
+export default hot(App);

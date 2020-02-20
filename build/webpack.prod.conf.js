@@ -3,7 +3,7 @@ const merge = require('webpack-merge')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
@@ -18,14 +18,14 @@ const { getCssLoaders } = require('./utils')
 const autoAddDllRes = () => {
   return new AddAssetHtmlPlugin([
     {
-      publicPath: config[process.env.BUILD_ENV].PUBLIC_PATH + config[process.env.BUILD_ENV].SUB_DIR+'/dll/css', // 注入到html中的路径
+      publicPath: config[process.env.BUILD_ENV].PUBLIC_PATH + config[process.env.BUILD_ENV].SUB_DIR + '/dll/css', // 注入到html中的路径
       outputPath: subDir('dll/css'), // 最终输出的目录
       filepath: resolve('src/assets/dll/**/*.css'),
       includeSourcemap: false,
       typeOfAsset: 'css'
     },
     {
-      publicPath: config[process.env.BUILD_ENV].PUBLIC_PATH + config[process.env.BUILD_ENV].SUB_DIR+'/dll/js', // 注入到html中的路径
+      publicPath: config[process.env.BUILD_ENV].PUBLIC_PATH + config[process.env.BUILD_ENV].SUB_DIR + '/dll/js', // 注入到html中的路径
       outputPath: subDir('dll/js'), // 最终输出的目录
       filepath: resolve('src/assets/dll/**/*.js'),
       includeSourcemap: false,

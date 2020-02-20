@@ -17,6 +17,7 @@ function getCssLoaders () {
   let isProd = env === 'production'
   let sourceMap = !isProd
   let lastLoader = isLocal ? 'style-loader' : MiniCssExtractPlugin.loader
+  let lastLoaderOptions = isLocal ? {} : { sourceMap: sourceMap }
   const cssInclude = [/src/]
   const loaders = [
     {
@@ -35,7 +36,7 @@ function getCssLoaders () {
     {
       test: /^(.*\.global)\.css$/,
       use: [
-        { loader: lastLoader, options: { sourceMap: sourceMap } },
+        { loader: lastLoader, options: lastLoaderOptions },
         {
           loader: 'css-loader',
           options: { sourceMap: sourceMap, importLoaders: 1 }
@@ -48,7 +49,7 @@ function getCssLoaders () {
       -%>, {
         test: /\.scss$/,
         use: [
-          { loader: lastLoader, options: { sourceMap: sourceMap } },
+          { loader: lastLoader, options: lastLoaderOptions },
           {
             loader: 'css-loader',
             options: { modules: true, localIdentName: '[hash:base64:6]', sourceMap: sourceMap, importLoaders: 2 }
@@ -61,7 +62,7 @@ function getCssLoaders () {
         {
           test: /^(?!.*\.global).*\.scss$/,
           use: [
-            { loader: lastLoader, options: { sourceMap: sourceMap } },
+            { loader: lastLoader, options: lastLoaderOptions },
             {
               loader: 'css-loader',
               options: { modules: true, localIdentName: '[hash:base64:6]', sourceMap: sourceMap, importLoaders: 2 }
@@ -76,7 +77,7 @@ function getCssLoaders () {
     -%>, {
       test: /\.less$/,
       use: [
-        { loader: lastLoader, options: { sourceMap: sourceMap } },
+        { loader: lastLoader, lastLoaderOptions },
         {
           loader: 'css-loader',
           options: { modules: true, localIdentName: '[hash:base64:6]', sourceMap: sourceMap, importLoaders: 2 }
@@ -89,7 +90,7 @@ function getCssLoaders () {
       {
         test: /^(?!.*\.global).*\.less$/,
         use: [
-          { loader: lastLoader, options: { sourceMap: sourceMap } },
+          { loader: lastLoader, options: lastLoaderOptions },
           {
             loader: 'css-loader',
             options: { modules: true, localIdentName: '[hash:base64:6]', sourceMap: sourceMap, importLoaders: 2 }

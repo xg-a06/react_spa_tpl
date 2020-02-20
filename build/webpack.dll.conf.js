@@ -1,5 +1,5 @@
 const webpack = require('webpack')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
@@ -7,7 +7,7 @@ const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const cssnano = require('cssnano')
 const path = require('path')
 const chalk = require('chalk')
-function resolve(dir) {
+function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
@@ -17,7 +17,7 @@ module.exports = {
   entry: {
     vendor: [
       'react',
-      'react-dom',
+      '@hot-loader/react-dom',
       'react-router-dom',
       'redux',
       'react-redux',
@@ -25,6 +25,18 @@ module.exports = {
     ],
     ui: ['antd', 'antd/dist/antd.min.css']
     // ui: ['antd/es/button', 'antd/dist/antd.min.css'],
+  },
+  output: {
+    filename: 'js/[name].[contenthash:8].dll.js',
+    path: resolve('src/assets/dll'),
+    library: '[name]',
+    libraryTarget: 'window'
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom'
+    }
   },
   module: {
     rules: [
@@ -41,12 +53,6 @@ module.exports = {
         }
       }
     ]
-  },
-  output: {
-    filename: 'js/[name].[contenthash:8].dll.js',
-    path: resolve('src/assets/dll'),
-    library: '[name]',
-    libraryTarget: 'window'
   },
   optimization: {
     minimizer: [
