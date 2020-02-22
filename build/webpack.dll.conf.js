@@ -57,7 +57,7 @@ module.exports = {
   optimization: {
     minimizer: [
       new ParallelUglifyPlugin({
-        cacheDir: '.cache/',
+        cacheDir: '.cache/dll/',
         uglifyJS: {
           output: {
             comments: false,

@@ -21,7 +21,7 @@ function getCssLoaders () {
   const cssInclude = [/src/]
   const loaders = [
     {
-      test: /\.css$/,
+      test: /\.global\.css$/,
       use: [
         { loader: lastLoader },
         {
@@ -34,12 +34,12 @@ function getCssLoaders () {
       include: [/node_modules/]
     },
     {
-      test: /^(.*\.global)\.css$/,
+      test: /^(?!.*\.global).*\.css$/,
       use: [
         { loader: lastLoader, options: lastLoaderOptions },
         {
           loader: 'css-loader',
-          options: { sourceMap: sourceMap, importLoaders: 1 }
+          options: { modules: { localIdentName: '[hash:base64:6]' }, sourceMap: sourceMap, importLoaders: 1 }
         },
         { loader: 'postcss-loader', options: { sourceMap: sourceMap } }
       ],
@@ -47,12 +47,12 @@ function getCssLoaders () {
     }
     <% if (css === 'sass') {
       -%>, {
-        test: /\.scss$/,
+        test: /\.global\.scss$/,
         use: [
           { loader: lastLoader, options: lastLoaderOptions },
           {
             loader: 'css-loader',
-            options: { modules: true, localIdentName: '[hash:base64:6]', sourceMap: sourceMap, importLoaders: 2 }
+            options: { sourceMap: sourceMap, importLoaders: 2 }
           },
           { loader: 'postcss-loader', options: { sourceMap: sourceMap } },
           { loader: 'sass-loader', options: { sourceMap: sourceMap } }
@@ -65,7 +65,7 @@ function getCssLoaders () {
             { loader: lastLoader, options: lastLoaderOptions },
             {
               loader: 'css-loader',
-              options: { modules: true, localIdentName: '[hash:base64:6]', sourceMap: sourceMap, importLoaders: 2 }
+              options: { modules: { localIdentName: '[hash:base64:6]' }, sourceMap: sourceMap, importLoaders: 2 }
             },
             { loader: 'postcss-loader', options: { sourceMap: sourceMap } },
             { loader: 'sass-loader', options: { sourceMap: sourceMap } }
@@ -75,12 +75,12 @@ function getCssLoaders () {
         <%} -%>
     <% if (css === 'less') {
     -%>, {
-      test: /\.less$/,
+      test: /\.global\.less$/,
       use: [
         { loader: lastLoader, lastLoaderOptions },
         {
           loader: 'css-loader',
-          options: { modules: true, localIdentName: '[hash:base64:6]', sourceMap: sourceMap, importLoaders: 2 }
+          options: { sourceMap: sourceMap, importLoaders: 2 }
         },
         { loader: 'postcss-loader', options: { sourceMap: sourceMap } },
         { loader: 'less-loader', options: { sourceMap: sourceMap } }
@@ -93,7 +93,7 @@ function getCssLoaders () {
           { loader: lastLoader, options: lastLoaderOptions },
           {
             loader: 'css-loader',
-            options: { modules: true, localIdentName: '[hash:base64:6]', sourceMap: sourceMap, importLoaders: 2 }
+            options: { modules: { localIdentName: '[hash:base64:6]' }, sourceMap: sourceMap, importLoaders: 2 }
           },
           { loader: 'postcss-loader', options: { sourceMap: sourceMap } },
           { loader: 'less-loader', options: { sourceMap: sourceMap } }

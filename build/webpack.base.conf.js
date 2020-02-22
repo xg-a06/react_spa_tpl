@@ -23,12 +23,7 @@ const baseConfig = {
     extensions: ['.js', '.jsx', '.json'],
     alias: {
       'react-dom': '@hot-loader/react-dom',
-      '@': resolve('src'),
-      '@components': resolve('src/components'),
-      '@assets': resolve('src/assets'),
-      '@pages': resolve('src/pages'),
-      '@routes': resolve('src/routes'),
-      '@store': resolve('src/store')
+      '@': resolve('src')
     }
   },
   module: {

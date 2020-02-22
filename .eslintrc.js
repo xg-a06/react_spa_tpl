@@ -18,6 +18,15 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react'],
+  settings: {
+    "import/resolver": {
+      alias: {
+        map: [
+          ['@components', path.resolve(paths.appSrc, 'components')],
+        ]
+      }
+    }
+  },
   rules: {
     'linebreak-style': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],

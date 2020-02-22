@@ -69,7 +69,7 @@ const buildConfig = merge(baseConfig, {
     },
     minimizer: [
       new ParallelUglifyPlugin({
-        cacheDir: '.cache/',
+        cacheDir: '.cache/app/',
         uglifyJS: {
           output: {
             comments: false,
