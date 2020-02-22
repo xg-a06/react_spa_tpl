@@ -1,3 +1,4 @@
+const webpackConfig = require('./build/webpack.dev.conf');
 module.exports = {
   env: {
     browser: true,
@@ -20,10 +21,8 @@ module.exports = {
   plugins: ['react'],
   settings: {
     "import/resolver": {
-      alias: {
-        map: [
-          ['@components', path.resolve(paths.appSrc, 'components')],
-        ]
+      webpack: {
+        config: webpackConfig,
       }
     }
   },
