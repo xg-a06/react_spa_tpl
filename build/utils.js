@@ -30,8 +30,7 @@ function getCssLoaders () {
         {
           loader: 'postcss-loader'
         }
-      ],
-      include: [/node_modules/]
+      ]
     },
     {
       test: /^(?!.*\.global).*\.css$/,
@@ -77,7 +76,7 @@ function getCssLoaders () {
     -%>, {
       test: /\.global\.less$/,
       use: [
-        { loader: lastLoader, lastLoaderOptions },
+        { loader: lastLoader, options: lastLoaderOptions },
         {
           loader: 'css-loader',
           options: { sourceMap: sourceMap, importLoaders: 2 }
