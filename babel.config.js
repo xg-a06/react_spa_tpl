@@ -44,16 +44,15 @@ const plugins = [
   <% } %> 'react-hot-loader/babel'
 ];
 
-if (process.env.BUILD_ENV === 'local') {
-  plugins.push([
-    'import',
-    {
-      libraryName: 'antd',
-      libraryDirectory: 'es',
-      style: 'css'
-    },
-  ]
-  );
-}
+plugins.push([
+  'import',
+  {
+    libraryName: 'antd',
+    libraryDirectory: 'es',
+    style: 'css'
+  },
+]
+);
+
 
 module.exports = { presets, plugins };

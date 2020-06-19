@@ -21,6 +21,16 @@ function getCssLoaders () {
   const cssInclude = [/src/]
   const loaders = [
     {
+      test: /\.css$/,
+      use: [
+        { loader: lastLoader },
+        {
+          loader: 'css-loader'
+        }
+      ],
+      include: resolve('node_modules')
+    },
+    {
       test: /\.global\.css$/,
       use: [
         { loader: lastLoader },
