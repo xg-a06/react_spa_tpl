@@ -1,6 +1,8 @@
 const webpack = require('webpack');
+const friendlyFormatter = require('eslint-friendly-formatter');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const config = require('./config');
 const { resolve } = require('./utils');
 const baseConfig = require('./webpack.base.conf');
@@ -13,13 +15,15 @@ const devConfig = merge(baseConfig, {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new CopyWebpackPlugin([
-      {
-        from: resolve('src/public'),
-        to: resolve(`dist/${config[process.env.BUILD_ENV].SUB_DIR}`),
-        ignore: ['.*'],
-      },
-    ]),
+    new ReactRefreshWebpackPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: resolve('src/public'),
+          to: resolve(`dist/${config[process.env.BUILD_ENV].SUB_DIR}`),
+        },
+      ],
+    }),
   ],
 });
 
@@ -29,12 +33,12 @@ const devConfig = merge(baseConfig, {
     use: {
       loader: 'eslint-loader',
       options: {
-        formatter: require('eslint-friendly-formatter')
-      }
+        formatter: friendlyFormatter,
+      },
     },
     include: [resolve('src')],
-    exclude:[resolve('src/assets')],
-    enforce: 'pre'
+    exclude: [resolve('src/assets')],
+    enforce: 'pre',
   })
   <%} -%>
 

@@ -17,7 +17,7 @@ function getCssLoaders () {
   let isProd = env === 'production'
   let sourceMap = !isProd
   let lastLoader = isLocal ? 'style-loader' : MiniCssExtractPlugin.loader
-  let lastLoaderOptions = isLocal ? {} : { sourceMap: sourceMap }
+  let lastLoaderOptions = isLocal ? {} : { sourceMap }
   const cssInclude = [/src/]
   const loaders = [
     {
@@ -48,9 +48,9 @@ function getCssLoaders () {
         { loader: lastLoader, options: lastLoaderOptions },
         {
           loader: 'css-loader',
-          options: { modules: { localIdentName: '[hash:base64:6]' }, sourceMap: sourceMap, importLoaders: 1 }
+          options: { modules: { localIdentName: '[hash:base64:6]' }, sourceMap, importLoaders: 1 }
         },
-        { loader: 'postcss-loader', options: { sourceMap: sourceMap } }
+        { loader: 'postcss-loader', options: { sourceMap } }
       ],
       include: cssInclude
     }
@@ -61,10 +61,10 @@ function getCssLoaders () {
           { loader: lastLoader, options: lastLoaderOptions },
           {
             loader: 'css-loader',
-            options: { sourceMap: sourceMap, importLoaders: 2 }
+            options: { sourceMap, importLoaders: 2 }
           },
-          { loader: 'postcss-loader', options: { sourceMap: sourceMap } },
-          { loader: 'sass-loader', options: { sourceMap: sourceMap } }
+          { loader: 'postcss-loader', options: { sourceMap } },
+          { loader: 'sass-loader', options: { sourceMap } }
         ],
         include: resolve('src')
       },
@@ -74,10 +74,10 @@ function getCssLoaders () {
             { loader: lastLoader, options: lastLoaderOptions },
             {
               loader: 'css-loader',
-              options: { modules: { localIdentName: '[hash:base64:6]' }, sourceMap: sourceMap, importLoaders: 2 }
+              options: { modules: { localIdentName: '[hash:base64:6]' }, sourceMap, importLoaders: 2 }
             },
-            { loader: 'postcss-loader', options: { sourceMap: sourceMap } },
-            { loader: 'sass-loader', options: { sourceMap: sourceMap } }
+            { loader: 'postcss-loader', options: { sourceMap } },
+            { loader: 'sass-loader', options: { sourceMap } }
           ],
           include: cssInclude
         }
@@ -89,10 +89,10 @@ function getCssLoaders () {
         { loader: lastLoader, options: lastLoaderOptions },
         {
           loader: 'css-loader',
-          options: { sourceMap: sourceMap, importLoaders: 2 }
+          options: { sourceMap, importLoaders: 2 }
         },
-        { loader: 'postcss-loader', options: { sourceMap: sourceMap } },
-        { loader: 'less-loader', options: { sourceMap: sourceMap } }
+        { loader: 'postcss-loader', options: { sourceMap } },
+        { loader: 'less-loader', options: { sourceMap } }
       ],
       include: resolve('src')
     },
@@ -102,10 +102,10 @@ function getCssLoaders () {
           { loader: lastLoader, options: lastLoaderOptions },
           {
             loader: 'css-loader',
-            options: { modules: { localIdentName: '[hash:base64:6]' }, sourceMap: sourceMap, importLoaders: 2 }
+            options: { modules: { localIdentName: '[hash:base64:6]' }, sourceMap, importLoaders: 2 }
           },
-          { loader: 'postcss-loader', options: { sourceMap: sourceMap } },
-          { loader: 'less-loader', options: { sourceMap: sourceMap } }
+          { loader: 'postcss-loader', options: { sourceMap } },
+          { loader: 'less-loader', options: { sourceMap } }
         ],
         include: cssInclude
       }
