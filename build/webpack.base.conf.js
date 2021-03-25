@@ -1,9 +1,15 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HappyPack = require('happypack');
-const os = require('os');
+const threadLoader = require('thread-loader');
 const config = require('./config');
 const { resolve, subDir } = require('./utils');
+
+threadLoader.warmup(
+  {
+    workers: 4,
+  },
+  ['babel-loader', '@babel/preset-env', 'less-loader']
+);
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -29,8 +35,17 @@ const baseConfig = {
     rules: [
       {
         test: /\.js[x]?$/,
-        use: 'happypack/loader?id=happy-babel',
         include: resolve('src'),
+        use: [
+          {
+            loader: 'thread-loader',
+            options: {
+              workers: 4,
+            },
+          },
+          'cache-loader',
+          'babel-loader?cacheDirectory=true',
+        ],
       },
       // {
       //   test: /\.js[x]?$/,
@@ -77,19 +92,6 @@ const baseConfig = {
       template: resolve('index.html'),
       filename: 'index.html',
       minify: true,
-    }),
-    new HappyPack({
-      id: 'happy-babel',
-      loaders: [
-        {
-          loader: 'babel-loader',
-          options: {
-            babelrc: true,
-            cacheDirectory: true, // 启用缓存
-          },
-        },
-      ],
-      threadPool: HappyPack.ThreadPool({ size: os.cpus().length }),
     }),
     new webpack.DefinePlugin({
       'process.env': {
