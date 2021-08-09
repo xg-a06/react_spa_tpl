@@ -2,7 +2,7 @@ const checkLogin = () =>
   new Promise((resolve) =>
     setTimeout(() => {
       resolve({ role: 'admin' });
-    }, 4000)
+    },2000)
   );
 
 export default {

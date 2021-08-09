@@ -1,6 +1,6 @@
 import { connect, actions } from '@/redux';
 
-import View from './view';
+import View from './overview';
 
 const stateFn = (state) => {
   const { resultType } = state.app;
