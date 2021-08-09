@@ -13,11 +13,11 @@ function subDir (dir) {
 function getCssLoaders () {
   const env = process.env.NODE_ENV;
   const build = process.env.BUILD_ENV;
-  let isLocal = build === 'local'
-  let isProd = env === 'production'
-  let sourceMap = !isProd
-  let lastLoader = isLocal ? 'style-loader' : MiniCssExtractPlugin.loader
-  let lastLoaderOptions = isLocal ? {} : { sourceMap }
+  const isLocal = build === 'local';
+  const isProd = env === 'production';
+  const sourceMap = !isProd;
+  const lastLoader = isLocal ? 'style-loader' : MiniCssExtractPlugin.loader
+  const lastLoaderOptions = isLocal ? {} : { sourceMap }
   const cssInclude = [/src/]
   const loaders = [
     {

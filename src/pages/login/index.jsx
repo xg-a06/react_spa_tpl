@@ -1,5 +1,5 @@
 import React from 'react';
 
-const Index = () => <div>list</div>;
+const Index = () => <div>login</div>;
 
 export default Index;

@@ -3,11 +3,12 @@ import produce from 'immer';
 import { pipeline } from '../utils/tools';
 import eventBus from '../utils/eventEmitter';
 import app from './modules/app';
+import auth from './modules/auth';
 
 const actions = {};
 const effects = {};
 const rootRef = { actions, effects };
-window.aaa = rootRef;
+
 eventBus.on('StoreCreated', (store) => {
   window.rootRef = rootRef;
   rootRef.dispatch = store.dispatch;
@@ -16,6 +17,7 @@ eventBus.on('StoreCreated', (store) => {
 
 const models = {
   app,
+  auth,
 };
 
 const collectionAndConvert = (rootRefParam, model) => {
@@ -26,9 +28,6 @@ const collectionAndConvert = (rootRefParam, model) => {
       const actionType = `${key.toLocaleUpperCase()}/${name.toLocaleUpperCase()}`;
       ret.modelReducers[actionType] = fn;
       ret.modelActions[name] = (payload) => {
-        if (!rootRefParam.dispatch) {
-          window.asd = rootRefParam;
-        }
         rootRefParam.dispatch({ type: actionType, payload });
       };
       return ret;

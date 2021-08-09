@@ -4,6 +4,8 @@ const config = {
   buildDetail: false,
   devServer: {
     contentBase: path.resolve('dist'),
+    useLocalIp:true,
+    host:'0.0.0.0',
     port: 2333,
     open: true,
     hot: true,
@@ -11,7 +13,9 @@ const config = {
       errors: true,
       warnings: false,
     },
-    historyApiFallback: true,
+    historyApiFallback: {
+      disableDotRule: true,
+    },
     proxy: {
       '/xxx': {
         target: 'http://xxx.com',

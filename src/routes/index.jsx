@@ -1,42 +1,41 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React, { createContext, useContext } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import React from 'react';
+import { useRoutes, BrowserRouter } from 'react-router-dom';
+import { connect, effects } from '@/redux';
+import routes from './config';
 
-export RouteConfig from './config';
-
-const RouteContext = createContext([]);
-
-const renderRoutes = (routes, switchProps = {}, extraProps = {}) => {
-  if (routes && routes.length > 0) {
-    return (
-      <Switch {...switchProps}>
-        {routes.map((route, i) => (
-          <Route
-            key={route.key || i}
-            path={route.path}
-            exact={route.exact}
-            strict={route.strict}
-            render={(props) => {
-              if (route.redirect) {
-                return <Redirect to={route.redirect} />;
-              }
-              return (
-                <RouteContext.Provider value={route.routes}>
-                  <route.component {...props} {...extraProps} route={route} />
-                </RouteContext.Provider>
-              );
-            }}
-          />
-        ))}
-      </Switch>
-    );
+let cache = false;
+const Routes = (props) => {
+  const { checkLogin, auth } = props;
+  if (!cache) {
+    cache = true;
+    throw checkLogin();
   }
-  return null;
+  const routing = useRoutes(routes(auth));
+  return <>{routing}</>;
 };
 
-const RouterView = () => {
-  const routes = useContext(RouteContext);
-  return renderRoutes(routes);
+const stateFn = (state) => {
+  const { auth } = state;
+  return {
+    auth,
+  };
 };
 
-export { renderRoutes, RouterView };
+const actionFn = () => {
+  const {
+    auth: { checkLogin },
+  } = effects;
+  return {
+    checkLogin,
+  };
+};
+
+const RoutesContainer = connect(stateFn, actionFn)(Routes);
+
+const Router = () => (
+  <BrowserRouter>
+    <RoutesContainer />
+  </BrowserRouter>
+);
+
+export default Router;
