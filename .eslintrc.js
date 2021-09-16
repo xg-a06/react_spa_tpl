@@ -6,28 +6,30 @@ module.exports = {
     es6: true,
   },
   extends: ['plugin:react/recommended', 'airbnb', 'prettier'],
-  parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2018,
+    ecmaVersion: 12,
     sourceType: 'module',
+    parser: '@babel/eslint-parser'
   },
   plugins: ['react'],
   settings: {
     'import/resolver': {
       alias: {
         map: [['@', path.resolve('./src')]],
-        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
-      },
-    },
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
+      }
+    }
   },
   globals: {},
   rules: {
+    'import/extensions': ['error', 'always', { js: 'never', ts: 'never', tsx: 'never' }],
     'import/no-extraneous-dependencies': 0,
     'no-param-reassign': 0,
     'no-underscore-dangle': 0,
     'react/prop-types': 0,
+    'react/jsx-filename-extension': 0,
   },
 };

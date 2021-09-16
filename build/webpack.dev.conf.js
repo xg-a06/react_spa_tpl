@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const friendlyFormatter = require('eslint-friendly-formatter');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -16,6 +17,7 @@ const devConfig = merge(baseConfig, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new ReactRefreshWebpackPlugin(),
+<% if(esLint){ -%>new ESLintPlugin(),<%} -%>
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -26,20 +28,5 @@ const devConfig = merge(baseConfig, {
     }),
   ],
 });
-
-<% if(esLint){ -%>
-  devConfig.module.rules.unshift({
-    test: /\.(js|jsx)$/,
-    use: {
-      loader: 'eslint-loader',
-      options: {
-        formatter: friendlyFormatter,
-      },
-    },
-    include: [resolve('src')],
-    exclude: [resolve('src/assets')],
-    enforce: 'pre',
-  })
-  <%} -%>
 
 module.exports = devConfig;
