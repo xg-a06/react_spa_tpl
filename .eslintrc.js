@@ -25,7 +25,7 @@ module.exports = {
   },
   globals: {},
   rules: {
-    'import/extensions': ['error', 'always', { js: 'never', ts: 'never', tsx: 'never' }],
+    'import/extensions': 0,
     'import/no-extraneous-dependencies': 0,
     'no-param-reassign': 0,
     'no-underscore-dangle': 0,
